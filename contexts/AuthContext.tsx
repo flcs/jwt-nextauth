@@ -1,7 +1,7 @@
 import Router, { useRouter } from "next/router"
 import { createContext, useContext, useEffect, useState } from "react"
 import { setCookie, parseCookies, destroyCookie } from "nookies"
-import { api } from "../services/api"
+import { api } from "../services/apiClient"
 
 interface Credentials {
   email: string
