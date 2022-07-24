@@ -34,7 +34,6 @@ export function setupAPIClient(
             api
               .post("/refresh", { refreshToken })
               .then((response) => {
-                console.log("res", response)
                 const { token } = response?.data || {}
                 setCookie(ctx, "nextauth.token", token, {
                   path: "/",

@@ -1,15 +1,22 @@
-import { GetServerSideProps } from "next"
-import { destroyCookie } from "nookies"
 import React from "react"
+import { Can } from "../components/Can"
 import { useAuth } from "../contexts/AuthContext"
 import { setupAPIClient } from "../services/api"
-import { api } from "../services/apiClient"
-import { AuthTokenError } from "../services/errors/AuthTokenError"
 import { withSSRAuth } from "../utils/withSSRAuth"
 
 const Dashboard = () => {
-  const { user } = useAuth()
-  return <div>Dashboard: {user?.email}</div>
+  const { user, signout } = useAuth()
+
+  return (
+    <div>
+      <div>Dashboard: {user?.email}</div>
+
+      <Can permissions={["metrics.list"]}>
+        <div>You can see metrics</div>
+      </Can>
+      <button onClick={signout}>Sign Out</button>
+    </div>
+  )
 }
 
 export const getServerSideProps = withSSRAuth(async (ctx) => {
