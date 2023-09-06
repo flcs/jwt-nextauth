@@ -9,12 +9,12 @@ const Dashboard = () => {
 
   return (
     <div>
-      <div>Dashboard: {user?.email}</div>
+      <div>Dashboard: {user?.email}{" "}<button onClick={signout}>Sign Out</button>
+      </div>
 
       <Can permissions={["metrics.list"]}>
         <div>You can see metrics</div>
       </Can>
-      <button onClick={signout}>Sign Out</button>
     </div>
   )
 }
