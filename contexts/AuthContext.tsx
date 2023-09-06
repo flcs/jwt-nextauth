@@ -34,6 +34,7 @@ export const signout = () => {
   Router.push("/")
   authChannel.postMessage("signout")
 }
+
 export const AuthProvider: React.FC<AuthContextProps> = ({ children }) => {
   const [user, setUser] = useState<User>()
   const isAuthenticated = !!user
@@ -59,6 +60,7 @@ export const AuthProvider: React.FC<AuthContextProps> = ({ children }) => {
         .get("/me")
         .then((response) => {
           const { email, permissions, roles } = response.data
+          console.log("/me: ", response.data);
           setUser({ email, permissions, roles })
         })
         .catch(() => {
@@ -76,6 +78,7 @@ export const AuthProvider: React.FC<AuthContextProps> = ({ children }) => {
         })
         .then(({ data }) => {
           const { token, refreshToken, permissions, roles } = data
+          console.log("/sessions: ", data);
           setCookie(undefined, "nextauth.token", token, {
             maxAge: 60 * 60 * 24 * 30,
             path: "/",
